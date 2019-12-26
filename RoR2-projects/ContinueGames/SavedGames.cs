@@ -25,7 +25,7 @@ using UnityEngine.Events;
 namespace SavedGames
 {
 
-    [BepInPlugin("com.morris1927.SavedGames", "SavedGames", "2.1.1")]
+    [BepInPlugin("com.morris1927.SavedGames", "SavedGames", "2.2.0")]
     public class SavedGames : BaseUnityPlugin {
 
         public static SavedGames instance { get; set; }

@@ -127,7 +127,7 @@ namespace SavedGames.Data {
             }
             foreach (var item in Object.FindObjectsOfType<SceneExitController>()) {
                 if (!item.name.Contains("Teleporter")) {
-                    if (item.destinationScene.sceneName != null) {
+                    if (item.destinationScene.baseSceneName != null) {
                         portals.Add(new PortalData(item));
                     }               
                 }

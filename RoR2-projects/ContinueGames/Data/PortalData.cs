@@ -16,7 +16,7 @@ namespace SavedGames.Data
 
         public PortalData(SceneExitController portal) {
             transform = new SerializableTransform(portal.transform);
-            name = portal.destinationScene.sceneName;
+            name = portal.destinationScene.baseSceneName;
             useRunNextStageScene = portal.useRunNextStageScene;
         }
 
@@ -31,7 +31,7 @@ namespace SavedGames.Data
                 //        break;
                 //    }
                 case "RoR2/Scenes/goldshores": {
-                        if (Stage.instance.sceneDef.sceneName.Contains("goldshores")) {
+                        if (Stage.instance.sceneDef.baseSceneName.Contains("goldshores")) {
                             var gameobject = Resources.Load<SpawnCard>("SpawnCards/InteractableSpawnCard/iscGoldshoresPortal").DoSpawn(transform.position.GetVector3(), transform.rotation.GetQuaternion(), null);
                             NetworkServer.Spawn(gameobject);
                             gameobject.GetComponent<SceneExitController>().useRunNextStageScene = useRunNextStageScene;

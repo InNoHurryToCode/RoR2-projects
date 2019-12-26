@@ -24,7 +24,7 @@ namespace SavedGames.Data
             difficulty = (int)run.selectedDifficulty;
             fixedTime = run.GetRunStopwatch();
             stageClearCount = run.stageClearCount;
-            sceneName = Stage.instance.sceneDef.sceneName;
+            sceneName = Stage.instance.sceneDef.baseSceneName;
             teamExp = (int) TeamManager.instance.GetTeamExperience(TeamIndex.Player);
         }
 
