@@ -78,8 +78,13 @@ namespace SavedGames.Data {
                     }
                 }
             }
-            foreach (var item in Object.FindObjectsOfType<ChestBehavior>()) {
-                chests.Add(new ChestData(item));
+
+            if (Stage.instance.sceneDef.baseSceneName != "bazaar")
+            {
+                foreach (var item in Object.FindObjectsOfType<ChestBehavior>())
+                {
+                    chests.Add(new ChestData(item));
+                }
             }
             foreach (var item in Object.FindObjectsOfType<RouletteChestController>())
             {
@@ -168,7 +173,8 @@ namespace SavedGames.Data {
         public void Load() {
             ClearStage();
 
-            foreach (var item in chests) {
+            foreach (var item in chests)
+            {
                 item.LoadChest();
             }
             foreach (var item in casinoChests)
@@ -257,6 +263,10 @@ namespace SavedGames.Data {
                     Object.Destroy(item.gameObject);
                 }
                 if (item.name.Contains("LunarCauldron")) {
+                    Object.Destroy(item.gameObject);
+                }
+                if (item.name.Contains("Duplicator"))
+                {
                     Object.Destroy(item.gameObject);
                 }
             }
