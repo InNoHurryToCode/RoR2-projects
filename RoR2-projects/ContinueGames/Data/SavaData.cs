@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace SavedGames.Data {
         public List<PlayerData> players;
         public List<EnemyData> enemies;
         public List<ChestData> chests;
+        public List<CasinoChestData> casinoChests;
         public List<BarrelData> barrels;
         public List<PrinterData> printers;
         public List<BrokenDroneData> brokenDrones;
@@ -29,6 +31,7 @@ namespace SavedGames.Data {
         public List<ShrineHealingData> healingShrines;
         public List<ShrineRestackData> orderShrines;
         public List<ShrineGoldshoresAccessData> goldshoreShrines;
+        public List<ShrineCleanseData> cleanseShrines;
         public List<ItemDropletData> itemDroplets;
         public List<PortalData> portals;
         public List<BazaarPodData> bazaarPods;
@@ -41,6 +44,7 @@ namespace SavedGames.Data {
             players = new List<PlayerData>();
             enemies = new List<EnemyData>();
             chests = new List<ChestData>();
+            casinoChests = new List<CasinoChestData>();
             barrels = new List<BarrelData>();
             printers = new List<PrinterData>();
             multiShops = new List<MultiShopData>();
@@ -56,6 +60,7 @@ namespace SavedGames.Data {
             lunarCauldrons = new List<LunarCauldronData>();
             healingShrines = new List<ShrineHealingData>();
             orderShrines = new List<ShrineRestackData>();
+            cleanseShrines = new List<ShrineCleanseData>();
 
             itemDroplets = new List<ItemDropletData>();
             portals = new List<PortalData>();
@@ -76,6 +81,11 @@ namespace SavedGames.Data {
             foreach (var item in Object.FindObjectsOfType<ChestBehavior>()) {
                 chests.Add(new ChestData(item));
             }
+            foreach (var item in Object.FindObjectsOfType<RouletteChestController>())
+            {
+                casinoChests.Add(new CasinoChestData(item));
+            }
+            
             foreach (var item in Object.FindObjectsOfType<BarrelInteraction>()) {
                 barrels.Add(new BarrelData(item));
             }
@@ -88,6 +98,10 @@ namespace SavedGames.Data {
                 }
                 if (item.name.Contains("LunarCauldron")) {
                     lunarCauldrons.Add(new LunarCauldronData(item));
+                }
+                if (item.name.Contains("ShrineCleanse")) 
+                {
+                    cleanseShrines.Add(new ShrineCleanseData(item));
                 }
             }
             foreach (var item in Object.FindObjectsOfType<MultiShopController>()) {
@@ -117,6 +131,7 @@ namespace SavedGames.Data {
                 }
 
             }
+
             foreach (var item in Object.FindObjectsOfType<SummonMasterBehavior>()) {
                 brokenDrones.Add(new BrokenDroneData(item));
             }
@@ -134,11 +149,11 @@ namespace SavedGames.Data {
             }
             foreach (var item in Object.FindObjectsOfType<PurchaseInteraction>()) {
                 if (item.name.Contains("GoldshoresBeacon")) {
-                    Debug.Log(item.name);
+                    //Debug.Log(item.name);
                     beacons.Add(new BeaconData(item));
                 }
                 if (item.name.Contains("HumanFan")) {
-                    Debug.Log(item.name);
+                    //Debug.Log(item.name);
                     fans.Add(new FanData(item));
                 }
             }
@@ -155,6 +170,10 @@ namespace SavedGames.Data {
 
             foreach (var item in chests) {
                 item.LoadChest();
+            }
+            foreach (var item in casinoChests)
+            {
+                item.LoadCasinoChest();
             }
             foreach (var item in barrels) {
                 item.LoadBarrel();
@@ -188,6 +207,10 @@ namespace SavedGames.Data {
             }
             foreach (var item in goldshoreShrines) {
                 item.LoadShrineGoldshores();
+            }
+            foreach (var item in cleanseShrines)
+            {
+                item.LoadShrineCleanse();
             }
             foreach (var item in brokenDrones) {
                 item.LoadBrokenDrone();

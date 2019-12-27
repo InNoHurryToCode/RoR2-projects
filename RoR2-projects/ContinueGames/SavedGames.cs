@@ -340,7 +340,10 @@ namespace SavedGames
             save.run.LoadData();
 
 
-            yield return new WaitForSeconds(Stage.instance == null ? 1.5f : 0.75f);
+            //yield return new WaitForSeconds(Stage.instance == null ? 1.5f : 0.75f);
+            Debug.Log("[SavedGames] Waiting on Stage.instace to load");
+            yield return new WaitUntil( () => Stage.instance != null );
+            Debug.Log("[SavedGames] Stage.instance loaded");
             save.Load();
             
             loadingScene = false;

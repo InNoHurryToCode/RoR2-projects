@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace SavedGames.Data
 {
@@ -24,7 +26,7 @@ namespace SavedGames.Data
             difficulty = (int)run.selectedDifficulty;
             fixedTime = run.GetRunStopwatch();
             stageClearCount = run.stageClearCount;
-            sceneName = Stage.instance.sceneDef.baseSceneName;
+            sceneName = SceneManager.GetActiveScene().name;
             teamExp = (int) TeamManager.instance.GetTeamExperience(TeamIndex.Player);
         }
 
@@ -65,7 +67,14 @@ namespace SavedGames.Data
                 }
             }
 
-            newRun.AdvanceStage(SceneCatalog.GetSceneDefFromSceneName(sceneName));
+            // Doesn't work anymore the sceneDef doesn't specify the map variant and a random one is chosen
+            //newRun.AdvanceStage(SceneCatalog.GetSceneDefFromSceneName(sceneName));
+            if (Stage.instance)
+            {
+                Stage.instance.CompleteServer();
+            }
+            newRun.InvokeMethod("GenerateStageRNG");
+            NetworkManager.singleton.ServerChangeScene(sceneName);
             newRun.stageClearCount = stageClearCount;
         }
 

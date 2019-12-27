@@ -10,7 +10,6 @@ namespace SavedGames.Data {
 
         public bool available;
 
-
         public ShrineCombatData(ShrineCombatBehavior shrine) {
             var purchaseInteraction = shrine.GetComponent<PurchaseInteraction>();
 
