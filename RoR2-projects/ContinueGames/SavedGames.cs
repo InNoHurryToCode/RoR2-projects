@@ -25,7 +25,7 @@ using UnityEngine.Events;
 namespace SavedGames
 {
 
-    [BepInPlugin("com.morris1927.SavedGames", "SavedGames", "2.2.0")]
+    [BepInPlugin("com.MagnusMagnuson.SavedGames", "SavedGames", "2.2.0")]
     public class SavedGames : BaseUnityPlugin {
 
         public static SavedGames instance { get; set; }
@@ -39,6 +39,7 @@ namespace SavedGames
 
         
         public void Awake() {
+            Debug.Log("SavedGames - Original by morris1927");
             //Singleton used for hacky crap :)
             if (instance == null) {
                 instance = this;
@@ -339,11 +340,18 @@ namespace SavedGames
             }
             save.run.LoadData();
 
-
-            //yield return new WaitForSeconds(Stage.instance == null ? 1.5f : 0.75f);
             Debug.Log("[SavedGames] Waiting on Stage.instace to load");
-            yield return new WaitUntil( () => Stage.instance != null );
+            if (Stage.instance == null)
+            {
+                yield return new WaitUntil(() => Stage.instance != null);
+            } else
+            {
+                yield return new WaitForSeconds(0.75f);
+            }
             Debug.Log("[SavedGames] Stage.instance loaded");
+
+
+
             save.Load();
             
             loadingScene = false;
