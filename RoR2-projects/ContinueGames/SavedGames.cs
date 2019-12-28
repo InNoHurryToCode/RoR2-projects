@@ -323,6 +323,10 @@ namespace SavedGames
                 Directory.CreateDirectory(directory);
             }
             File.WriteAllText($"{directory}{fileName}.json", json);
+            Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+            {
+                baseToken = $"Game {fileName} saved."
+            });
 
         }
 
@@ -346,7 +350,7 @@ namespace SavedGames
                 yield return new WaitUntil(() => Stage.instance != null);
             } else
             {
-                yield return new WaitForSeconds(0.75f);
+                yield return new WaitForSeconds(1f);
             }
             Debug.Log("[SavedGames] Stage.instance loaded");
 
