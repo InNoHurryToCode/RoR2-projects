@@ -25,7 +25,7 @@ using UnityEngine.Events;
 namespace SavedGames
 {
 
-    [BepInPlugin("com.MagnusMagnuson.SavedGames", "SavedGames", "2.2.0")]
+    [BepInPlugin("com.MagnusMagnuson.SavedGames", "SavedGames", "2.2.1")]
     public class SavedGames : BaseUnityPlugin {
 
         public static SavedGames instance { get; set; }
@@ -205,20 +205,24 @@ namespace SavedGames
 
                     contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.MinSize;
 
+                    if(Directory.Exists(directory))
+                    {
+                        foreach (var file in Directory.GetFiles(directory))
+                        {
+                            FileStream saveFile = File.Open(file, FileMode.Open);
+                            string fileName = saveFile.Name.Replace(directory, "")
+                                                           .Replace(".json", "");
+                            ModButton fileSelectButton = new ModButton(fileName);
+                            fileSelectButton.customButtonTransition.onClick.AddListener(delegate () {
+                                RoR2.Console.instance.SubmitCmd(null, $"load {fileName}");
+                            });
+                            fileSelectButton.gameObject.GetComponent<LayoutElement>().minHeight = 200;
+                            fileSelectButton.gameObject.transform.SetParent(contentObject.transform);
 
-                    foreach (var file in Directory.GetFiles(directory)) {
-                        FileStream saveFile = File.Open(file, FileMode.Open);
-                        string fileName = saveFile.Name.Replace(directory, "")
-                                                       .Replace(".json", "");
-                        ModButton fileSelectButton = new ModButton(fileName);
-                        fileSelectButton.customButtonTransition.onClick.AddListener(delegate () {
-                            RoR2.Console.instance.SubmitCmd(null, $"load {fileName}");
-                        });
-                        fileSelectButton.gameObject.GetComponent<LayoutElement>().minHeight = 200;
-                        fileSelectButton.gameObject.transform.SetParent(contentObject.transform);
-
-                        saveFile.Close();
+                            saveFile.Close();
+                        }
                     }
+
 
                 }));
 
