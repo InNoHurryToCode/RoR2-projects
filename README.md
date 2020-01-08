@@ -1,9 +1,3 @@
-Hi, its been a struggle to update anything (and have it in a passable state), so I'm allowing anyone to use my source code for their own mods, and to take over my own mods if you wish
+Hi, I saw some changes I wanted to make to this mod, and am now going to be at the very least maintaining it, and hopefully adding some new features every now and then as well.
 
-Find other people mantaining these mods here:
-
-RoR2Cheats (now DebugToolkit)  
->https://github.com/harbingerofme/DebugToolkit
-  
-DropInMultiplayer  
->https://github.com/SushiDevshi/DropInMultiplayer
+Go ahead and thank MagnusMagnuson for maintaning this before me, and Morris1927 for creating the original mod!
