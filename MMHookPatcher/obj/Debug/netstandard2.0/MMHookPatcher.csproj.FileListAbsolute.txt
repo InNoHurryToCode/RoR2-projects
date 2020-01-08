@@ -1,0 +1,8 @@
+C:\Users\Rewin\Documents\save\MMHookPatcher\bin\Debug\netstandard2.0\MMHookPatcher.deps.json
+C:\Users\Rewin\Documents\save\MMHookPatcher\bin\Debug\netstandard2.0\MMHookPatcher.dll
+C:\Users\Rewin\Documents\save\MMHookPatcher\bin\Debug\netstandard2.0\MMHookPatcher.pdb
+C:\Users\Rewin\Documents\save\MMHookPatcher\obj\Debug\netstandard2.0\MMHookPatcher.csprojAssemblyReference.cache
+C:\Users\Rewin\Documents\save\MMHookPatcher\obj\Debug\netstandard2.0\MMHookPatcher.AssemblyInfoInputs.cache
+C:\Users\Rewin\Documents\save\MMHookPatcher\obj\Debug\netstandard2.0\MMHookPatcher.AssemblyInfo.cs
+C:\Users\Rewin\Documents\save\MMHookPatcher\obj\Debug\netstandard2.0\MMHookPatcher.dll
+C:\Users\Rewin\Documents\save\MMHookPatcher\obj\Debug\netstandard2.0\MMHookPatcher.pdb

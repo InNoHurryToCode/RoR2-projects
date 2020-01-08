@@ -1,0 +1,3 @@
+C:\Users\Rewin\Documents\save\AllyPing\obj\Debug\netstandard2.0\AllyPing.AssemblyInfoInputs.cache
+C:\Users\Rewin\Documents\save\AllyPing\obj\Debug\netstandard2.0\AllyPing.AssemblyInfo.cs
+C:\Users\Rewin\Documents\save\AllyPing\obj\Debug\netstandard2.0\AllyPing.csprojAssemblyReference.cache

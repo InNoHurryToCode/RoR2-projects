@@ -1,0 +1,3 @@
+C:\Users\Rewin\Documents\save\FullscreenModes\obj\Debug\netstandard2.0\FullscreenModes.csprojAssemblyReference.cache
+C:\Users\Rewin\Documents\save\FullscreenModes\obj\Debug\netstandard2.0\FullscreenModes.AssemblyInfoInputs.cache
+C:\Users\Rewin\Documents\save\FullscreenModes\obj\Debug\netstandard2.0\FullscreenModes.AssemblyInfo.cs

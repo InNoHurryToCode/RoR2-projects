@@ -1,0 +1,3 @@
+C:\Users\Rewin\Documents\save\SandBox\obj\Debug\netstandard2.0\SandBox.csprojAssemblyReference.cache
+C:\Users\Rewin\Documents\save\SandBox\obj\Debug\netstandard2.0\SandBox.AssemblyInfoInputs.cache
+C:\Users\Rewin\Documents\save\SandBox\obj\Debug\netstandard2.0\SandBox.AssemblyInfo.cs

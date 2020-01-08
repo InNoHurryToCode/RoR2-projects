@@ -1,0 +1,3 @@
+C:\Users\Rewin\Documents\save\RoR2Cheats\obj\Debug\netstandard2.0\RoR2Cheats.csprojAssemblyReference.cache
+C:\Users\Rewin\Documents\save\RoR2Cheats\obj\Debug\netstandard2.0\RoR2Cheats.AssemblyInfoInputs.cache
+C:\Users\Rewin\Documents\save\RoR2Cheats\obj\Debug\netstandard2.0\RoR2Cheats.AssemblyInfo.cs
