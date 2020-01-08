@@ -362,8 +362,6 @@ namespace SavedGames {
 
             SaveData save = new SaveData();
 
-            Debug.Log(args);
-            Debug.Log(args.userArgs);
             string json = TinyJson.JSONWriter.ToJson(save);
             string fileName = "";
             for (int i = 0; i < args.userArgs.Count; i++) {
