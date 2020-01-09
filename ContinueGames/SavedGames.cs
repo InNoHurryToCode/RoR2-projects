@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using LeTai.Asset.TranslucentImage;
 using RoR2;
 using RoR2.Networking;
 using RoR2.UI;
@@ -10,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +20,7 @@ using ArgsHelper = Utilities.Generic.ArgsHelper;
 
 namespace SavedGames {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("com.MagnusMagnuson.SavedGames", "SavedGames", "2.2.1")]
+    [BepInPlugin("com.RavioliGravioli.SavedGames", "SavedGames", "2.3.1")]
     public class SavedGames : BaseUnityPlugin {
 
         public static SavedGames instance { get; set; }
@@ -33,6 +35,23 @@ namespace SavedGames {
         public static bool sortDir = true;
         public static List<SaveButton> saveButtons = new List<SaveButton>();
         public static string lastSelected = "";
+        public static Dictionary<string, string> levelNames = new Dictionary<string, string>() {
+            { "golemplains", "Titanic Plains" },
+            { "blackbeach", "Distant Roost" },
+            { "foggyswamp", "Wetlands Aspect" },
+            { "wispgraveyard", "Scorched Acres" },
+            { "goolake", "Abandoned Aqueduct" },
+            { "shipgraveyard", "Siren's Call" },
+            { "dampcavesimple", "Abyssal Depths" },
+            { "mysteryspace", "Hidden Realm: A Moment, Fractured" },
+            { "bazaar", "Hidden Realm: Bazaar Between Time" },
+            { "frozenwall", "Rallypoint Delta" },
+            { "goldshores", "Hidden Realm: Gilded Coast" },
+            { "limbo", "Hidden Realm: A Moment, Whole" },
+            { "arena", "Hidden Realm: Void Fields" }
+        };
+
+        private static Texture2D latestScreenshot;
 
         public void Awake() {
             Debug.Log("SavedGames - Original by morris1927");
@@ -228,7 +247,7 @@ namespace SavedGames {
 
                     if (Directory.Exists(directory)) {
                         saveButtons.Clear();
-                        foreach (var file in Directory.GetFiles(directory)) {
+                        foreach (var file in Directory.GetFiles(directory, "*.json")) {
                             FileStream saveFile = File.Open(file, FileMode.Open, FileAccess.ReadWrite);
                             string fileName = saveFile.Name.Replace(directory, "")
                                                            .Replace(".json", "");
@@ -261,6 +280,8 @@ namespace SavedGames {
 
             //Add save button to pause screen
             On.RoR2.UI.PauseScreenController.Awake += (orig, self) => {
+                StartCoroutine(CaptureScreen(self));
+
                 ModButton button = new ModButton("Save");
                 GameObject buttonObject = button.gameObject;
                 buttonObject.transform.SetParent(self.mainPanel.GetChild(0));
@@ -281,13 +302,42 @@ namespace SavedGames {
 
                 CustomButtonTransition buttonEvents = buttonObject.GetComponent<CustomButtonTransition>();
 
-                buttonEvents.onClick.AddListener(() => { RoR2.Console.instance.SubmitCmd(null, $"save {inputField.tmpInputField.text}"); });
+                buttonEvents.onClick.AddListener(delegate {
+                    string saveName = inputField.tmpInputField.text;
+                    if (File.Exists($"{directory}{saveName}.json")) {
+                        SimpleDialogBox box = SimpleDialogBox.Create();
+                        box.headerLabel.text = "Overwrite save?";
+                        box.descriptionLabel.text = "There's already save with that name, are you sure you wish to overwrite it?";
+                        box.AddActionButton(() => {
+                            RoR2.Console.instance.SubmitCmd(null, $"save {saveName}");
+                        }, "Overwrite");
+                        box.AddCancelButton("Cancel");
+                    } else {
+                        RoR2.Console.instance.SubmitCmd(null, $"save {saveName}");
+                    }
+                });
 
                 orig(self);
             };
         }
 
+        private IEnumerator CaptureScreen(PauseScreenController controller) {
+            yield return null;
+            controller.GetComponentInChildren<TranslucentImage>().enabled = false;
+            controller.mainPanel.gameObject.SetActive(false);
+
+            // Wait for screen rendering to complete
+            yield return new WaitForEndOfFrame();
+
+            latestScreenshot = ScreenCapture.CaptureScreenshotAsTexture();
+
+            // Show UI after we're done
+            controller.GetComponentInChildren<TranslucentImage>().enabled = true;
+            controller.mainPanel.gameObject.SetActive(true);
+        }
+
         private void SortSaves() {
+            Debug.Log("Sorting saves");
             saveButtons.Sort((SaveButton b1, SaveButton b2) => {
                 if (sort == 0) {
                     // Sort by time
@@ -339,11 +389,7 @@ namespace SavedGames {
                 return;
             }
 
-            string fileName = "";
-            for (int i = 0; i < args.userArgs.Count; i++) {
-                fileName += ArgsHelper.GetValue(args.userArgs, i) + " ";
-            }
-            fileName = fileName.TrimEnd();
+            string fileName = fileName = String.Join(" ", args.userArgs);
             string saveJSON = File.ReadAllText($"{directory}{fileName}.json");
 
             SaveData save = TinyJson.JSONParser.FromJson<SaveData>(saveJSON);
@@ -363,11 +409,9 @@ namespace SavedGames {
             SaveData save = new SaveData();
 
             string json = TinyJson.JSONWriter.ToJson(save);
-            string fileName = "";
-            for (int i = 0; i < args.userArgs.Count; i++) {
-                fileName += ArgsHelper.GetValue(args.userArgs, i) + " ";
-            }
-            fileName = fileName.TrimEnd();
+            string fileName = String.Join(" ", args.userArgs);
+
+            File.WriteAllBytes($"{directory}{fileName}.png", latestScreenshot.EncodeToPNG());
 
             if (!Directory.Exists(directory)) {
                 Directory.CreateDirectory(directory);

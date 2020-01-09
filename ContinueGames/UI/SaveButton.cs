@@ -65,11 +65,24 @@ namespace SavedGames.UI {
             statText.text = $"{save.run.stageClearCount} stages cleared\n" +
                 $"{difficulties[save.run.difficulty]} difficulty\n" +
                 $"{TimeSpan.FromSeconds(save.run.fixedTime).ToString("mm':'ss")} time\n" +
-                $"{save.run.sceneName}";
+                $"{SavedGames.levelNames[save.run.sceneName] ?? save.run.sceneName}";
             statText.color = Color.white;
             statText.enableWordWrapping = false;
             statText.alignment = TextAlignmentOptions.TopRight;
             statText.fontSize = 22;
+
+            if (File.Exists($"{SavedGames.directory}{name}.png")) {
+                GameObject screenshot = new GameObject("Screenshot");
+                screenshot.transform.SetParent(container.transform);
+                screenshot.AddComponent<LayoutElement>().preferredWidth = 355;
+                screenshot.GetComponent<LayoutElement>().flexibleWidth = 0;
+                screenshot.transform.SetAsFirstSibling();
+
+                Texture2D image = new Texture2D(2, 2);
+                image.LoadImage(File.ReadAllBytes($"{SavedGames.directory}{name}.png"));
+
+                screenshot.AddComponent<Image>().sprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0, 0));
+            }
 
             ModButton deleteButton = new ModButton("Delete");
             deleteButton.gameObject.transform.SetParent(container.transform);

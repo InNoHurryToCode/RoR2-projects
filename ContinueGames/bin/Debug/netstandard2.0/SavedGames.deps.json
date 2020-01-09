@@ -18,7 +18,9 @@
           "Unity.TextMeshPro": "0.0.0.0",
           "UnityEngine.CoreModule": "0.0.0.0",
           "UnityEngine": "0.0.0.0",
+          "UnityEngine.ImageConversionModule": "0.0.0.0",
           "UnityEngine.Networking": "1.0.0.0",
+          "UnityEngine.ScreenCaptureModule": "0.0.0.0",
           "UnityEngine.UI": "1.0.0.0",
           "UnityEngine.UIModule": "0.0.0.0"
         },
@@ -96,11 +98,27 @@
           }
         }
       },
+      "UnityEngine.ImageConversionModule/0.0.0.0": {
+        "runtime": {
+          "UnityEngine.ImageConversionModule.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "UnityEngine.Networking/1.0.0.0": {
         "runtime": {
           "UnityEngine.Networking.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UnityEngine.ScreenCaptureModule/0.0.0.0": {
+        "runtime": {
+          "UnityEngine.ScreenCaptureModule.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -248,14 +266,6 @@
           }
         }
       },
-      "UnityEngine.ImageConversionModule/0.0.0.0": {
-        "runtime": {
-          "UnityEngine.ImageConversionModule.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "MonoMod/19.11.5.1": {
         "runtime": {
           "MonoMod.exe": {
@@ -339,14 +349,6 @@
       "UnityEngine.Physics2DModule/0.0.0.0": {
         "runtime": {
           "UnityEngine.Physics2DModule.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "UnityEngine.ScreenCaptureModule/0.0.0.0": {
-        "runtime": {
-          "UnityEngine.ScreenCaptureModule.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
           }
@@ -630,7 +632,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "UnityEngine.ImageConversionModule/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "UnityEngine.Networking/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UnityEngine.ScreenCaptureModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -725,11 +737,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "UnityEngine.ImageConversionModule/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "MonoMod/19.11.5.1": {
       "type": "reference",
       "serviceable": false,
@@ -781,11 +788,6 @@
       "sha512": ""
     },
     "UnityEngine.Physics2DModule/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEngine.ScreenCaptureModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

@@ -128,4 +128,3 @@ C:\Users\Rewin\Documents\save\ContinueGames\bin\Debug\netstandard2.0\UnityEngine
 C:\Users\Rewin\Documents\save\ContinueGames\obj\Debug\netstandard2.0\SavedGames.csproj.CopyComplete
 C:\Users\Rewin\Documents\save\ContinueGames\obj\Debug\netstandard2.0\SavedGames.dll
 C:\Users\Rewin\Documents\save\ContinueGames\obj\Debug\netstandard2.0\SavedGames.pdb
-C:\Users\Rewin\Documents\save\ContinueGames\obj\Debug\netstandard2.0\SavedGames.csprojAssemblyReference.cache
